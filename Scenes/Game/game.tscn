@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://detuqgd7bpukx"]
+
+[ext_resource type="Texture2D" uid="uid://cbyn34anr55ue" path="res://Assets/background/rocks_2.png" id="1_qikps"]
+[ext_resource type="PackedScene" uid="uid://c1gfviqrxt7ec" path="res://Scenes/Plane/plane.tscn" id="2_i1e5p"]
+[ext_resource type="PackedScene" uid="uid://cop0v5kmetw3b" path="res://Scenes/Barrier/barrier.tscn" id="3_ciybh"]
+
+[node name="Game" type="Node2D"]
+
+[node name="DeleteLater" type="Sprite2D" parent="."]
+position = Vector2(45, 318)
+texture = ExtResource("1_qikps")
+
+[node name="Plane" parent="." instance=ExtResource("2_i1e5p")]
+position = Vector2(46, 306)
+
+[node name="Barrier" parent="." instance=ExtResource("3_ciybh")]
