@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c1gfviqrxt7ec"]
+[gd_scene load_steps=11 format=3 uid="uid://c1gfviqrxt7ec"]
 
 [ext_resource type="Script" uid="uid://cp0i8rdc8ud3e" path="res://Scenes/Plane/plane.gd" id="1_cels0"]
 [ext_resource type="Texture2D" uid="uid://dbm8bah8c0oun" path="res://Assets/plane/planes_sheet.png" id="1_xhrip"]
@@ -35,6 +35,44 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_uj8hv"]
 radius = 28.0713
 
+[sub_resource type="Animation" id="Animation_e1cjv"]
+resource_name = "jump"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -0.436332, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ohuft"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m1yso"]
+_data = {
+&"RESET": SubResource("Animation_ohuft"),
+&"jump": SubResource("Animation_e1cjv")
+}
+
 [node name="Plane" type="CharacterBody2D"]
 script = ExtResource("1_cels0")
 
@@ -48,3 +86,8 @@ frame_progress = 0.963549
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(5, 0)
 shape = SubResource("CircleShape2D_uj8hv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_m1yso")
+}
