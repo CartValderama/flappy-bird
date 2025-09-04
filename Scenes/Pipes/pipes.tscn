@@ -8,13 +8,21 @@
 script = ExtResource("1_8mivx")
 
 [node name="Laser" parent="." instance=ExtResource("1_tdr4r")]
+collision_layer = 0
 
 [node name="Lower" parent="." instance=ExtResource("2_8mivx")]
 position = Vector2(0, 80)
+collision_layer = 0
 
 [node name="Upper" parent="." instance=ExtResource("2_8mivx")]
 position = Vector2(0, -80)
 rotation = 3.14159
+collision_layer = 0
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(150, 0)
+
+[connection signal="body_entered" from="Laser" to="." method="_on_laser_body_entered"]
+[connection signal="body_entered" from="Lower" to="." method="_on_pipe_body_entered"]
+[connection signal="body_entered" from="Upper" to="." method="_on_pipe_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="screen_exited"]

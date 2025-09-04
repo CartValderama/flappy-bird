@@ -1,15 +1,16 @@
 extends CharacterBody2D
 
+class_name PlaneTappy
+
 var _gravity: float = ProjectSettings.get("physics/2d/default_gravity")
-var jump_power: float = -350
+var JUMP_POWER: float = -350
 
 @onready var plane_jump_anim: AnimationPlayer = $AnimationPlayer
 @onready var plane_propeler_anim: AnimatedSprite2D = $AnimatedSprite2D
-
+@onready var engine_sounds: AudioStreamPlayer = $EngineSounds
 
 func _ready() -> void:
 	pass 
-
 
 func _physics_process(delta: float) -> void:
 	jump(delta)
@@ -24,9 +25,10 @@ func jump(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("jump"):
 		plane_jump_anim.play("jump")
-		velocity.y = jump_power
-		
+		velocity.y = JUMP_POWER
 		
 func die() -> void:
 	plane_propeler_anim.stop()
 	set_physics_process(false)
+	SignalHub.emit_on_plane_died()
+	engine_sounds.stop()

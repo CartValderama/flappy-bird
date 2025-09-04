@@ -1,16 +1,18 @@
 [gd_scene load_steps=3 format=3 uid="uid://cop0v5kmetw3b"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_tp4lg"]
-distance = -855.0
+distance = -853.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6rch2"]
 normal = Vector2(0, 1)
 
 [node name="Barrier" type="StaticBody2D"]
-position = Vector2(0, -16)
+collision_layer = 2
 
 [node name="FloorCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 20)
 shape = SubResource("WorldBoundaryShape2D_tp4lg")
 
 [node name="CeilingCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -20)
 shape = SubResource("WorldBoundaryShape2D_6rch2")

@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://c1gfviqrxt7ec"]
+[gd_scene load_steps=12 format=3 uid="uid://c1gfviqrxt7ec"]
 
 [ext_resource type="Script" uid="uid://cp0i8rdc8ud3e" path="res://Scenes/Plane/plane.gd" id="1_cels0"]
 [ext_resource type="Texture2D" uid="uid://dbm8bah8c0oun" path="res://Assets/plane/planes_sheet.png" id="1_xhrip"]
+[ext_resource type="AudioStream" uid="uid://c1jhsi8qhxfy1" path="res://Assets/audio/engine.mp3" id="3_ohuft"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cels0"]
 atlas = ExtResource("1_xhrip")
@@ -35,6 +36,21 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_uj8hv"]
 radius = 28.0713
 
+[sub_resource type="Animation" id="Animation_ohuft"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
 [sub_resource type="Animation" id="Animation_e1cjv"]
 resource_name = "jump"
 length = 0.3
@@ -52,21 +68,6 @@ tracks/0/keys = {
 "values": [0.0, -0.436332, 0.0]
 }
 
-[sub_resource type="Animation" id="Animation_ohuft"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_m1yso"]
 _data = {
 &"RESET": SubResource("Animation_ohuft"),
@@ -74,6 +75,7 @@ _data = {
 }
 
 [node name="Plane" type="CharacterBody2D"]
+collision_mask = 2
 script = ExtResource("1_cels0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -91,3 +93,8 @@ shape = SubResource("CircleShape2D_uj8hv")
 libraries = {
 &"": SubResource("AnimationLibrary_m1yso")
 }
+
+[node name="EngineSounds" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ohuft")
+volume_db = -5.0
+autoplay = true
